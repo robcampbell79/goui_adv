@@ -11,15 +11,16 @@ import(
 )
 
 func storyColor(s string, c string) string {
-	switch c :
-case "him":
-	return "\033[35;1m"+s+"\033[0m"
-case "hiw":
-	return "\033[37;1m"+s+"\033[0m"
-case "tst1"
-	return "\033[31;1m"+s+"\033[0m"
-default:
-	return "\033[37;1m"+s+"\033[0m"
+	switch c {
+	case "him":
+		return "\033[35;1m"+s+"\033[0m"
+	case "hiw":
+		return "\033[37;1m"+s+"\033[0m"
+	case "tst1":
+		return "\033[31;1m"+s+"\033[0m"
+	default:
+		return "\033[37;1m"+s+"\033[0m"
+	}
 }
 
 func layout(g *gocui.Gui) error {
@@ -33,7 +34,7 @@ func layout(g *gocui.Gui) error {
 		v.Title = "Story"
 		v.Wrap = true
 		
-		hiMagenta := storyColor("Just some random words", "HiMagenta")
+		hiMagenta := storyColor("Just some random words", "him")
 		fmt.Fprintf(v, hiMagenta)
 	}
 
@@ -99,7 +100,7 @@ func action(g *gocui.Gui, v *gocui.View) error {
 
 		v.Clear()
 		
-		hiMagenta := storyColor("And now we have moved beyond", "HiMagenta")
+		hiMagenta := storyColor("And now we have moved beyond", "hiw")
 		fmt.Fprintf(v, hiMagenta)
 
 	} else {
@@ -114,7 +115,7 @@ func action(g *gocui.Gui, v *gocui.View) error {
 
 		v.Clear()
 
-		hiMagenta := storyColor("\nOops, I messed up", "HiMag")
+		hiMagenta := storyColor("Oops, I messed up", "tst1")
 		fmt.Fprintf(v, hiMagenta)
 		fmt.Fprintf(v, "\n"+vbuf)
 	}
