@@ -13,6 +13,8 @@ import(
 	"github.com/jroimartin/gocui"
 )
 
+var intro int = 0
+
 func storyColor(s string, c string) string {
 	switch c {
 	case "him":
@@ -40,7 +42,7 @@ func layout(g *gocui.Gui) error {
 		intro := storyColor("Full Moon Madness\n\n", "him")
 		fmt.Fprintf(v, intro)
 
-		hiMagenta := storyColor("Press the Space Bar to begin.", "him")
+		hiMagenta := storyColor("Press Enter to begin.", "him")
 		fmt.Fprintf(v, hiMagenta)
 	}
 
@@ -90,21 +92,42 @@ func quit(g *gocui.Gui, v *gocui.View) error {
 	return gocui.ErrQuit
 }
 
-// func(p Player) CreatePlayer() (Player, int) {
-// 	v, err := g.View("v1")
-// 	if err != nil {
-// 		return err
-// 	}
+func createPlayer(g *gocui.Gui, v *gocui.View) error {
 
-// 	v.Clear()
-		
-// 	hiMagenta := storyColor("Please enter your characters first and last name separated by a space and press enter.", "hiw")
-// 	fmt.Fprintf(v, hiMagenta)
+	vbuf := v.ViewBuffer()
 
-// 	fn
+	v, err := g.View("v1")
+	if err != nil {
+		return err
+	}
 
+	if vbuf == "" {
+		v.Clear()
+			
+		enterName := storyColor("Please enter your characters first and last name separated by a space and press enter.", "hiw")
+		fmt.Fprintf(v, enterName)
+	} else {
+		name := strings.TrimRight(vbuf, " ")
 	
-// }
+		fullName := strings.Split(name, " ")
+	
+		fname := fullName[0]
+		lname := fullName[1]
+	
+		v.Clear()
+			
+		helloName := storyColor("Hello "+fname+" "+lname+", let us develop your character. What is your occupation?", "hiw")
+		fmt.Fprintf(v, helloName)
+
+		occup := strings.TrimRight(vbuf, " ")
+
+	}
+
+
+
+	return nil
+
+}
 
 func action(g *gocui.Gui, v *gocui.View) error {
 	vbuf := v.ViewBuffer()
@@ -162,9 +185,17 @@ func main() {
 		log.Panicln(err)
 	}
 
-	if err := g.SetKeybinding("v4", gocui.KeyEnter, gocui.ModNone, action); err != nil {
+	if intro == 0 {
+		if err := g.SetKeybinding("v4", gocui.KeyEnter, gocui.ModNone, createPlayer); err != nil {
 		log.Panicln(err)
+		}
+	} else {
+		if err := g.SetKeybinding("v4", gocui.KeyEnter, gocui.ModNone, action); err != nil {
+			log.Panicln(err)
+		}
+
 	}
+
 
 	if err := g.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Panicln(err)
