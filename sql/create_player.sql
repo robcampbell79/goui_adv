@@ -1,0 +1,2 @@
+create table p_player(p_id int auto_increment, uid varchar(10) not null, fname varchar(25) not null, lname varchar(50) not null, occupation varchar(75), intelligence int, knowledge int, occult int, 
+observation int, deduction int, induction int, abduction int, dexterity int, strength int, stamina int, speed int, primary key(p_id));

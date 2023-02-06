@@ -5,6 +5,9 @@ import(
 	"log"
 	_"database/sql"
 	"strings"
+	_"math/rand"
+	_"time"
+	//"goui_adv/protagonist"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jroimartin/gocui"
@@ -34,7 +37,10 @@ func layout(g *gocui.Gui) error {
 		v.Title = "Story"
 		v.Wrap = true
 		
-		hiMagenta := storyColor("Just some random words", "him")
+		intro := storyColor("Full Moon Madness\n\n", "him")
+		fmt.Fprintf(v, intro)
+
+		hiMagenta := storyColor("Press the Space Bar to begin.", "him")
 		fmt.Fprintf(v, hiMagenta)
 	}
 
@@ -83,6 +89,22 @@ func layout(g *gocui.Gui) error {
 func quit(g *gocui.Gui, v *gocui.View) error {
 	return gocui.ErrQuit
 }
+
+// func(p Player) CreatePlayer() (Player, int) {
+// 	v, err := g.View("v1")
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	v.Clear()
+		
+// 	hiMagenta := storyColor("Please enter your characters first and last name separated by a space and press enter.", "hiw")
+// 	fmt.Fprintf(v, hiMagenta)
+
+// 	fn
+
+	
+// }
 
 func action(g *gocui.Gui, v *gocui.View) error {
 	vbuf := v.ViewBuffer()

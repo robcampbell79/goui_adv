@@ -1,0 +1,2 @@
+create table p_inventory(p_id int auto_increment, uid varchar(10), chamber_key int, office_key1 int, office_key2 int, office_key3 int, church_key int, temple_key int, secret_key int, shop_key int, rope int, 
+flashlight int, lantern int, torch int, phone int, laptop int, acid int, bible int, fairytales_book int, spell_book int, magic_candle int, occultist_robe int, figurine int, lockpick_set int, primary key(p_id));

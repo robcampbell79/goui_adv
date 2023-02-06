@@ -1,0 +1,1 @@
+create table p_progress(p_id int auto_increment, uid varchar(10), location varchar(25), point int, primary key(p_id));

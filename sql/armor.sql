@@ -1,0 +1,1 @@
+create table p_armor(p_id int auto_increment, uid varchar(10), type varchar(25), durability int, equiped int, primary key(p_id));

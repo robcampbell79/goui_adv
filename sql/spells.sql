@@ -1,0 +1,1 @@
+create table p_spells(p_id int auto_increment, uid varchar(10), type varchar(50), primary key(p_id));
